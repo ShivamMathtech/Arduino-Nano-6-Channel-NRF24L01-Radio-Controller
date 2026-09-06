@@ -16,6 +16,8 @@ A compact six-channel wireless control system built with two Arduino Nano boards
 
 ## System overview
 
+![image](hw.png)
+
 ```text
 Two joysticks + two potentiometers
                 │
@@ -38,54 +40,54 @@ Two joysticks + two potentiometers
 
 ### Transmitter
 
-| Quantity | Component |
-| ---: | --- |
-| 1 | Arduino Nano |
-| 1 | NRF24L01+PA+LNA transceiver with antenna |
-| 1 | NRF24L01 5 V adapter/regulator board |
-| 2 | PS2-style dual-axis joystick modules |
-| 2 | 10 kΩ linear potentiometers |
-| 1 | 100 µF, 16 V electrolytic capacitor |
-| 1 | Suitable battery, switch, and connector |
-| — | Perfboard, headers, and hookup wire |
+| Quantity | Component                                |
+| -------: | ---------------------------------------- |
+|        1 | Arduino Nano                             |
+|        1 | NRF24L01+PA+LNA transceiver with antenna |
+|        1 | NRF24L01 5 V adapter/regulator board     |
+|        2 | PS2-style dual-axis joystick modules     |
+|        2 | 10 kΩ linear potentiometers              |
+|        1 | 100 µF, 16 V electrolytic capacitor      |
+|        1 | Suitable battery, switch, and connector  |
+|        — | Perfboard, headers, and hookup wire      |
 
 ### Receiver
 
-| Quantity | Component |
-| ---: | --- |
-| 1 | Arduino Nano |
-| 1 | NRF24L01+PA+LNA transceiver with antenna |
-| 1 | NRF24L01 5 V adapter/regulator board |
-| 1 | 100 µF, 16 V electrolytic capacitor |
-| 6 | Three-pin output headers (`Signal`, `+5V`, `GND`) |
-| 1 | 2-cell 7.4 V Li-ion battery pack |
-| 1 | Regulated 5 V BEC appropriate for the connected load |
+| Quantity | Component                                            |
+| -------: | ---------------------------------------------------- |
+|        1 | Arduino Nano                                         |
+|        1 | NRF24L01+PA+LNA transceiver with antenna             |
+|        1 | NRF24L01 5 V adapter/regulator board                 |
+|        1 | 100 µF, 16 V electrolytic capacitor                  |
+|        6 | Three-pin output headers (`Signal`, `+5V`, `GND`)    |
+|        1 | 2-cell 7.4 V Li-ion battery pack                     |
+|        1 | Regulated 5 V BEC appropriate for the connected load |
 
 ## NRF24L01 SPI connections
 
 Use the same radio wiring on the transmitter and receiver.
 
-| NRF24L01 signal | Arduino Nano | Purpose |
-| --- | --- | --- |
-| GND | GND | Ground |
-| VCC | 5V through the adapter input | Adapter power |
-| CE | D9 | Radio enable |
-| CSN | D10 | SPI chip select |
-| SCK | D13 | SPI clock |
-| MOSI | D11 | SPI controller output |
-| MISO | D12 | SPI controller input |
-| IRQ | Not connected | Optional interrupt |
+| NRF24L01 signal | Arduino Nano                 | Purpose               |
+| --------------- | ---------------------------- | --------------------- |
+| GND             | GND                          | Ground                |
+| VCC             | 5V through the adapter input | Adapter power         |
+| CE              | D9                           | Radio enable          |
+| CSN             | D10                          | SPI chip select       |
+| SCK             | D13                          | SPI clock             |
+| MOSI            | D11                          | SPI controller output |
+| MISO            | D12                          | SPI controller input  |
+| IRQ             | Not connected                | Optional interrupt    |
 
 ### NRF24L01 2×4 header orientation
 
 Always confirm the orientation printed on the specific radio module before applying power.
 
 | Pin | Signal | Pin | Signal |
-| ---: | --- | ---: | --- |
-| 1 | GND | 2 | VCC |
-| 3 | CE | 4 | CSN |
-| 5 | SCK | 6 | MOSI |
-| 7 | MISO | 8 | IRQ |
+| --: | ------ | --: | ------ |
+|   1 | GND    |   2 | VCC    |
+|   3 | CE     |   4 | CSN    |
+|   5 | SCK    |   6 | MOSI   |
+|   7 | MISO   |   8 | IRQ    |
 
 > **Important:** A bare NRF24L01 module uses **3.3 V**, not 5 V. The diagrams assume a compatible NRF24L01 adapter board whose input accepts 5 V and regulates it for the radio. Never connect a bare radio's VCC pin directly to 5 V.
 
@@ -95,32 +97,32 @@ Connect the 100 µF capacitor across the adapter input supply: capacitor `+` to 
 
 ### Joystick 1
 
-| Joystick pin | Arduino Nano |
-| --- | --- |
-| VCC | 5V |
-| GND | GND |
-| VRx | A0 |
-| VRy | A1 |
-| SW | Not connected |
+| Joystick pin | Arduino Nano  |
+| ------------ | ------------- |
+| VCC          | 5V            |
+| GND          | GND           |
+| VRx          | A0            |
+| VRy          | A1            |
+| SW           | Not connected |
 
 ### Joystick 2
 
-| Joystick pin | Arduino Nano |
-| --- | --- |
-| VCC | 5V |
-| GND | GND |
-| VRx | A2 |
-| VRy | A3 |
-| SW | Not connected |
+| Joystick pin | Arduino Nano  |
+| ------------ | ------------- |
+| VCC          | 5V            |
+| GND          | GND           |
+| VRx          | A2            |
+| VRy          | A3            |
+| SW           | Not connected |
 
 ### Auxiliary potentiometers
 
 Each potentiometer has two outer terminals and one center wiper.
 
-| Control | Supply terminals | Wiper |
-| --- | --- | --- |
-| Potentiometer 1 | 5V and GND | A6 |
-| Potentiometer 2 | 5V and GND | A7 |
+| Control         | Supply terminals | Wiper |
+| --------------- | ---------------- | ----- |
+| Potentiometer 1 | 5V and GND       | A6    |
+| Potentiometer 2 | 5V and GND       | A7    |
 
 If a channel moves in the opposite direction, swap that potentiometer's two outer terminals or invert the channel in firmware.
 
@@ -133,14 +135,14 @@ If a channel moves in the opposite direction, swap that potentiometer's two oute
 
 ## Receiver pin mapping
 
-| Output | Arduino Nano signal pin | Typical role |
-| --- | --- | --- |
-| Channel 1 | D2 | Primary control 1 |
-| Channel 2 | D3 | Primary control 2 |
-| Channel 3 | D4 | Primary control 3 |
-| Channel 4 | D5 | Primary control 4 |
-| Channel 5 (AUX 1) | D6 | Auxiliary control 1 |
-| Channel 6 (AUX 2) | D7 | Auxiliary control 2 |
+| Output            | Arduino Nano signal pin | Typical role        |
+| ----------------- | ----------------------- | ------------------- |
+| Channel 1         | D2                      | Primary control 1   |
+| Channel 2         | D3                      | Primary control 2   |
+| Channel 3         | D4                      | Primary control 3   |
+| Channel 4         | D5                      | Primary control 4   |
+| Channel 5 (AUX 1) | D6                      | Auxiliary control 1 |
+| Channel 6 (AUX 2) | D7                      | Auxiliary control 2 |
 
 Arrange every receiver output header consistently:
 
@@ -220,15 +222,15 @@ Begin testing at low transmit power and short range. Increase power only after r
 
 ## Troubleshooting
 
-| Problem | Checks |
-| --- | --- |
-| Radio not detected | Verify CE/CSN pins, SPI pins, adapter orientation, and common ground |
-| Intermittent packets | Place the capacitor close to the adapter, shorten power leads, and use a stable supply |
+| Problem                      | Checks                                                                                                 |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Radio not detected           | Verify CE/CSN pins, SPI pins, adapter orientation, and common ground                                   |
+| Intermittent packets         | Place the capacitor close to the adapter, shorten power leads, and use a stable supply                 |
 | Nano resets when servos move | Use a higher-current external BEC and improve grounding; do not use the Nano regulator for servo power |
-| Channels reversed | Swap a potentiometer's outer pins or reverse the value in firmware |
-| Joystick center drifts | Add calibration, deadband, and averaging in firmware |
-| Short operating range | Check antenna connection, power integrity, RF settings, and physical obstructions |
-| Outputs move after link loss | Implement and test a timed receiver failsafe |
+| Channels reversed            | Swap a potentiometer's outer pins or reverse the value in firmware                                     |
+| Joystick center drifts       | Add calibration, deadband, and averaging in firmware                                                   |
+| Short operating range        | Check antenna connection, power integrity, RF settings, and physical obstructions                      |
+| Outputs move after link loss | Implement and test a timed receiver failsafe                                                           |
 
 ## Safety
 
